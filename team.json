@@ -1,0 +1,13 @@
+{
+  "department": "Data Science",
+  "members": [
+    {
+      "name": "Vishal",
+      "level": "Specialist"
+    },
+    {
+      "name": "Aarav",
+      "level": "Senior Analyst"
+    }
+  ]
+}
