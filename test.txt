@@ -21,4 +21,4 @@ CadRI                MONTREAL-8451445-v37-Project_Rail_SPA__06041...   applicati
 CadRI                [mask]20150618_Financial Due Deligence Report...   application/pdf 11
 CadRI                [mask] 20150714_Tax  Diligence Red Flag Report_...   application/pdf 6
 CadRI                [mask]20150720_Sojitz Minority Interest Valua...   application/pdf 15
-feature:             filler1, filler2
+features:            dropdown 1,drop down 2
