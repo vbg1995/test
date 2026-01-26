@@ -1,5 +1,5 @@
-Total chunks in index: 5994
-Unique documents: 62
+Total chunks in index: 5000
+Unique documents: 65
 
 ====================================================================================================
 Folder               Document                                           Type            Chunks
