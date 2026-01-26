@@ -2,7 +2,7 @@ Total chunks in index: 5000
 Unique documents: 65
 
 ====================================================================================================
-Folder               Document                                           Type            Chunks
+Folder               Document/Type                                       Type            Chunks
 ====================================================================================================
 CadRI                20150608_CadRI_案件概要説明書(最終).pdf                     application/pdf 2
 CadRI                20150623_CadRI_案件概要補足(別紙).pdf                      application/pdf 7
