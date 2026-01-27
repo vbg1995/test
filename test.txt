@@ -6,9 +6,6 @@ Folder               Document/Type                                       Type   
 ====================================================================================================
 features:            dropdown 1
 features:            dropdown 2
-feature:             filler1
-feature:             filler2
-feature:             filler3
 CadRI                20150608_CadRI_案件概要説明書(最終).pdf                     application/pdf 2
 CadRI                20150623_CadRI_案件概要補足(別紙).pdf                      application/pdf 7
 CadRI                20150722_案件説明書用CadRI_IRR表_SCA新ベースケース (新PPA).xlsx   application/vnd.openxmlformats-officedocument.spreadsheetml.sheet 34
