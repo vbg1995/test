@@ -1,0 +1,408 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Employee Details Form</title>
+  <style>
+    :root{
+      --bg1:#6a11cb;
+      --bg2:#2575fc;
+      --card-bg: #ffffff;
+      --text:#1f2937;
+      --muted:#6b7280;
+      --primary:#7c3aed;
+      --primary-600:#6d28d9;
+      --accent:#22c55e;
+      --danger:#ef4444;
+      --ring: rgba(124, 58, 237, 0.35);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: linear-gradient(135deg, var(--bg1), var(--bg2));
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 2rem;
+    }
+
+    .container {
+      width: min(920px, 100%);
+    }
+
+    .header {
+      color: white;
+      text-align: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .header h1 {
+      margin: 0 0 .4rem 0;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      text-shadow: 0 2px 10px rgba(0,0,0,.25);
+    }
+
+    .header p {
+      margin: 0;
+      opacity: .9;
+    }
+
+    .card {
+      background: radial-gradient(1200px 400px at 10% -10%, rgba(124,58,237,.15), transparent 40%),
+                  radial-gradient(1200px 400px at 110% 110%, rgba(34,197,94,.15), transparent 40%),
+                  var(--card-bg);
+      border-radius: 18px;
+      box-shadow: 0 8px 25px rgba(0,0,0,.18), 0 2px 8px rgba(0,0,0,.12);
+      padding: 1.25rem;
+      backdrop-filter: blur(2px);
+      border: 1px solid rgba(255,255,255,.35);
+    }
+
+    .bar {
+      height: 6px;
+      background: linear-gradient(90deg, #f59e0b, #ef4444, #10b981, #3b82f6, #a855f7);
+      border-radius: 999px;
+      margin-bottom: 1rem;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1rem;
+    }
+
+    .field { grid-column: span 12; }
+    @media (min-width: 640px){ .sm-6 { grid-column: span 6; } }
+    @media (min-width: 880px){ .md-4 { grid-column: span 4; } .md-6 { grid-column: span 6; } }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: .35rem;
+    }
+
+    .hint { color: var(--muted); font-size: .85rem; }
+
+    input[type="text"], input[type="email"], input[type="tel"], input[type="date"], select, textarea {
+      width: 100%;
+      padding: .75rem .85rem;
+      border-radius: 10px;
+      border: 1px solid #e5e7eb;
+      outline: none;
+      transition: border-color .15s ease, box-shadow .15s ease, transform .05s ease;
+      background: #fffffffa;
+    }
+
+    textarea { min-height: 96px; resize: vertical; }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px var(--ring);
+    }
+
+    .row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .4rem .7rem;
+      background: #f3f4f6;
+      border-radius: 999px;
+      border: 1px solid #e5e7eb;
+      font-size: .92rem;
+    }
+
+    .actions { grid-column: span 12; display:flex; gap:.75rem; justify-content:flex-end; margin-top: .25rem; }
+
+    .btn {
+      appearance: none;
+      border: none;
+      border-radius: 12px;
+      padding: .8rem 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .05s ease, box-shadow .15s ease, filter .15s ease;
+    }
+
+    .btn:active { transform: translateY(1px); }
+
+    .btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary-600)); color: #fff; box-shadow: 0 8px 18px rgba(124,58,237,.35); }
+    .btn-primary:hover { filter: brightness(1.05); }
+
+    .btn-ghost { background: #ffffff; color: var(--text); border: 1px solid #e5e7eb; }
+
+    .btn-danger { background: var(--danger); color: #fff; }
+
+    .section-title {
+      grid-column: span 12;
+      margin-top: .25rem;
+      padding-top: .5rem;
+      border-top: 1px dashed #e5e7eb;
+      color: #374151;
+      letter-spacing: .2px;
+    }
+
+    .footer-note { text-align:center; color: #eef2ff; margin-top: 1rem; font-size: .9rem; }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      background: #111827;
+      color: white;
+      padding: .9rem 1rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,.35);
+      opacity: 0;
+      transform: translateY(-12px);
+      transition: opacity .25s ease, transform .25s ease;
+      display: flex; align-items: center; gap:.6rem;
+      z-index: 10;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast .dot { width:10px; height:10px; border-radius:50%; background: var(--accent); box-shadow: 0 0 0 6px rgba(34,197,94,.25); }
+
+    .req { color: var(--danger); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Employee Details</h1>
+      <p>Fill in the information below. Fields marked with <span class="req">*</span> are required.</p>
+    </div>
+
+    <div class="card">
+      <div class="bar"></div>
+      <form id="employeeForm" novalidate>
+        <!-- Basic Info -->
+        <h3 class="section-title">Basic Information</h3>
+        <div class="field md-6">
+          <label for="fullName">Full Name <span class="req">*</span></label>
+          <input id="fullName" name="fullName" type="text" placeholder="e.g., Aanya Sharma" required />
+          <div class="hint">Enter your legal full name.</div>
+        </div>
+        <div class="field md-6">
+          <label for="empId">Employee New ID <span class="req">*</span></label>
+          <input id="empId" name="empId" type="text" placeholder="e.g., EMP-1024" pattern="[A-Za-z0-9_-]{2,}" required />
+          <div class="hint">Alphanumeric, dashes/underscores allowed.</div>
+        </div>
+
+        <div class="field md-6">
+          <label for="email">Work Email <span class="req">*</span></label>
+          <input id="email" name="email" type="email" placeholder="name@company.com" required />
+        </div>
+        <div class="field md-6">
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" type="tel" placeholder="e.g., +91 98765 43210" pattern="^[+0-9 ()-]{8,}$" />
+        </div>
+
+        <!-- Role & Org -->
+        <h3 class="section-title">Role & Organization</h3>
+        <div class="field md-6">
+          <label for="jobTitle">Job Title <span class="req">*</span></label>
+          <input id="jobTitle" name="jobTitle" type="text" placeholder="e.g., Data Scientist" required />
+        </div>
+        <div class="field md-6">
+          <label for="department">Department <span class="req">*</span></label>
+          <select id="department" name="department" required>
+            <option value="">Select department</option>
+            <option>Data Science</option>
+            <option>Engineering</option>
+            <option>Product</option>
+            <option>Sales</option>
+            <option>Marketing</option>
+            <option>Human Resources</option>
+            <option>Finance</option>
+            <option>Operations</option>
+            <option>IT Support</option>
+          </select>
+        </div>
+
+        <div class="field md-4">
+          <label for="doj">Date of Joining <span class="req">*</span></label>
+          <input id="doj" name="doj" type="date" required />
+        </div>
+        <div class="field md-4">
+          <label for="empType">Employment Type <span class="req">*</span></label>
+          <select id="empType" name="empType" required>
+            <option value="">Select type</option>
+            <option>Full-Time</option>
+            <option>Part-Time</option>
+            <option>Contract</option>
+            <option>Intern</option>
+          </select>
+        </div>
+        <div class="field md-4">
+          <label for="location">Office Location</label>
+          <input id="location" name="location" type="text" placeholder="e.g., Pune" />
+        </div>
+
+        <!-- Personal -->
+        <h3 class="section-title">Personal Details</h3>
+        <div class="field md-6">
+          <label for="gender">Gender</label>
+          <select id="gender" name="gender">
+            <option value="">Prefer not to say</option>
+            <option>Female</option>
+            <option>Male</option>
+            <option>Non-binary</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field md-6">
+          <label for="country">Country</label>
+          <select id="country" name="country">
+            <option value="">Select country</option>
+            <option>India</option>
+            <option>United States</option>
+            <option>United Kingdom</option>
+            <option>Germany</option>
+            <option>Singapore</option>
+            <option>Australia</option>
+            <option>Canada</option>
+          </select>
+        </div>
+
+        <div class="field sm-6">
+          <label for="address1">Address Line 1</label>
+          <input id="address1" name="address1" type="text" placeholder="Apartment, suite, etc." />
+        </div>
+        <div class="field sm-6">
+          <label for="address2">Address Line 2</label>
+          <input id="address2" name="address2" type="text" placeholder="Street, area" />
+        </div>
+        <div class="field md-4">
+          <label for="city">City</label>
+          <input id="city" name="city" type="text" placeholder="e.g., Pune" />
+        </div>
+        <div class="field md-4">
+          <label for="state">State/Province</label>
+          <input id="state" name="state" type="text" placeholder="e.g., Maharashtra" />
+        </div>
+        <div class="field md-4">
+          <label for="zip">ZIP/Postal Code</label>
+          <input id="zip" name="zip" type="text" placeholder="e.g., 411001" />
+        </div>
+
+        <!-- Skills & Upload -->
+        <h3 class="section-title">Skills & Uploads</h3>
+        <div class="field md-6">
+          <label>Core Skills</label>
+          <div class="row" role="group" aria-label="Core skills">
+            <label class="chip"><input type="checkbox" name="skills" value="Python" /> Python</label>
+            <label class="chip"><input type="checkbox" name="skills" value="SQL" /> SQL</label>
+            <label class="chip"><input type="checkbox" name="skills" value="Machine Learning" /> ML</label>
+            <label class="chip"><input type="checkbox" name="skills" value="Cloud" /> Cloud</label>
+            <label class="chip"><input type="checkbox" name="skills" value="Power BI" /> Power BI</label>
+          </div>
+        </div>
+        <div class="field md-6">
+          <label for="photo">Profile Photo</label>
+          <input type="file" id="photo" name="photo" accept="image/*" />
+          <div class="hint">Optional. JPG/PNG recommended.</div>
+        </div>
+
+        <div class="field">
+          <label for="notes">Notes</label>
+          <textarea id="notes" name="notes" placeholder="Anything we should know?"></textarea>
+        </div>
+
+        <!-- Actions -->
+        <div class="actions">
+          <button type="button" class="btn btn-ghost" id="prefillBtn">Prefill Demo</button>
+          <button type="reset" class="btn btn-danger">Reset</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="footer-note">Made with ❤ for vibrant teams</div>
+  </div>
+
+  <div class="toast" id="toast"><span class="dot"></span><span id="toastMsg">Saved successfully</span></div>
+
+  <script>
+    // Basic client-side validation and UX niceties
+    const form = document.getElementById('employeeForm');
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toastMsg');
+
+    function showToast(message) {
+      toastMsg.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        // find first invalid and focus
+        const firstInvalid = form.querySelector(':invalid');
+        if (firstInvalid) firstInvalid.focus();
+        showToast('Please complete the required fields.');
+        return;
+      }
+
+      // Collect data to demonstrate submission (stays client-side)
+      const data = new FormData(form);
+      const payload = Object.fromEntries(data.entries());
+      const skills = Array.from(form.querySelectorAll('input[name="skills"]:checked')).map(x => x.value);
+      payload.skills = skills;
+
+      // Persist to localStorage as a demo (no backend)
+      const submissions = JSON.parse(localStorage.getItem('employeeSubmissions') || '[]');
+      submissions.push({ ...payload, submittedAt: new Date().toISOString() });
+      localStorage.setItem('employeeSubmissions', JSON.stringify(submissions));
+
+      showToast('Employee details saved locally ✔');
+      form.reset();
+    });
+
+    // Prefill for demo/testing
+    document.getElementById('prefillBtn').addEventListener('click', () => {
+      const sample = {
+        fullName: 'Vishal Bapurav Gaikwad',
+        empId: 'EMP-2026',
+        email: 'vishal.gaikwad@company.com',
+        phone: '+91 98765 43210',
+        jobTitle: 'Specialist - Data Sciences',
+        department: 'Data Science',
+        doj: new Date().toISOString().slice(0,10),
+        empType: 'Full-Time',
+        location: 'Pune',
+        gender: '',
+        country: 'India',
+        address1: 'Baner',
+        address2: 'High Street',
+        city: 'Pune',
+        state: 'Maharashtra',
+        zip: '411045',
+        notes: 'Excited to build ML solutions.'
+      };
+      Object.entries(sample).forEach(([k,v]) => {
+        const el = document.getElementById(k);
+        if (el) el.value = v;
+      });
+      // tick a couple of skills
+      form.querySelectorAll('input[name="skills"]').forEach(cb => {
+        cb.checked = ['Python','SQL','Machine Learning'].includes(cb.value);
+      });
+      showToast('Demo data filled');
+    });
+  </script>
+</body>
+</html>
