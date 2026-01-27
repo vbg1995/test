@@ -4,7 +4,8 @@ Unique documents: 65
 ====================================================================================================
 Folder               Document/Type                                       Type            Chunks
 ====================================================================================================
-
+feature:             filler1, filler2,filler3
+features:            dropdown 1,drop down 2
 CadRI                20150608_CadRI_案件概要説明書(最終).pdf                     application/pdf 2
 CadRI                20150623_CadRI_案件概要補足(別紙).pdf                      application/pdf 7
 CadRI                20150722_案件説明書用CadRI_IRR表_SCA新ベースケース (新PPA).xlsx   application/vnd.openxmlformats-officedocument.spreadsheetml.sheet 34
@@ -23,3 +24,5 @@ CadRI                [mask] 20150714_Tax  Diligence Red Flag Report_...   applic
 CadRI                [mask]20150720_Sojitz Minority Interest Valua...   application/pdf 15
 feature:             filler1, filler2,filler3
 features:            dropdown 1,drop down 2
+CadRI                20150608_CadRI_案件概要説明書(最終).pdf                     application/pdf 2
+CadRI                20150623_CadRI_案件概要補足(別紙).pdf                      application/pdf 7
