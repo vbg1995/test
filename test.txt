@@ -23,3 +23,5 @@ CadRI                [mask] 20150714_Tax  Diligence Red Flag Report_...   applic
 CadRI                [mask]20150720_Sojitz Minority Interest Valua...   application/pdf 15
 feature:             filler1, filler2,filler3
 features:            dropdown 1,drop down 2
+feature:             filler1, filler2,filler3
+features:            dropdown 1,drop down 2
