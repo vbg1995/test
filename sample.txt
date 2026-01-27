@@ -1,6 +1,7 @@
 orange 
 yello 
-green
+white
 blue
 purple
-indigo
+Red
+magenta
