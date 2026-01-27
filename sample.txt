@@ -1,0 +1,6 @@
+orange 
+yello 
+green
+blue
+purple
+indigo
